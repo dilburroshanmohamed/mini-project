@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: white;
+        }
+        header {
+            padding: 20px;
+            background: rgba(0,0,0,0.4);
+        }
+        header h1 {
+            margin: 0;
+        }
+        .card {
+            margin: 80px auto;
+            max-width: 500px;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
+        }
+        .safe {
+            color: #00ff99;
+            font-size: 1.5em;
+        }
+        .risk {
+            color: #ff4d4d;
+            font-size: 1.5em;
+        }
+        .btn {
+            margin-top: 25px;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            background-color: #ffffff;
+            color: #ff5e62;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #ff5e62;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🩺 Prediction Result</h1>
+    </header>
+
+    <div class="card">
+        {% if result %}
+            {% if "Not at Risk" in result %}
+                <h2 class="safe">✅ {{ result }}</h2>
+            {% else %}
+                <h2 class="risk">⚠️ {{ result }}</h2>
+            {% endif %}
+        {% else %}
+            <h2>No result available</h2>
+        {% endif %}
+
+        <a href="/form/" class="btn">🔄 Try Again</a>
+        <a href="/" class="btn">🏠 Home</a>
+    </div>
+</body>
+</html>
