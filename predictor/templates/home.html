@@ -3,81 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <title>Heart Disease Prediction</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
-            text-align: center;
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 20px;
-        }
-        header h1 {
-            font-size: 2.5em;
-            margin: 0;
-        }
-        main {
-            margin: 80px auto;
-            max-width: 600px;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
-        }
-        main h2 {
-            margin-bottom: 20px;
-            font-size: 2em;
-        }
-        p {
-            font-size: 1.2em;
-            line-height: 1.6;
-        }
-        .btn {
-            margin-top: 25px;
-            padding: 12px 25px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 8px;
-            background-color: #ffffff;
-            color: #ff4081;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-        .btn:hover {
-            background-color: #ff4081;
-            color: white;
-        }
-        footer {
-            margin-top: 50px;
-            padding: 15px;
-            font-size: 0.9em;
-            background: rgba(0,0,0,0.3);
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
+<style>
+    body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to right, #007BFF, #00C6FF);
+    color: #fff;
+}
+
+header {
+    background: rgba(0, 0, 50, 0.5);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.btn {
+    background-color: #ffffff;
+    color: #007BFF;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #007BFF;
+    color: #ffffff;
+}
+
+main {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.info h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.info p {
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+    color: #f0f8ff;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    border-radius: 15px;
+    width: 250px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    color: #ffffff;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    color: #00C6FF;
+}
+
+.card p {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+footer {
+    background: rgba(0, 0, 50, 0.4);
+    padding: 20px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
 <body>
     <header>
-        <h1>❤️ Heart Disease Prediction System</h1>
+        <div class="hero">
+            <h1>❤️ Heart Disease Prediction</h1>
+            <p>Empowering you to take control of your heart health</p>
+            <a href="/form/" class="btn">Start Assessment</a>
+        </div>
     </header>
 
     <main>
-        <h2>Welcome!</h2>
-        <p>
-            This website uses <b>Machine Learning</b> to predict the chances 
-            of heart disease based on medical details like Age, Cholesterol, 
-            Blood Pressure, and more.
-        </p>
-        <a href="/form/" class="btn">Start Prediction</a>
+        <section class="info">
+            <h2>Why Check Your Heart?</h2>
+            <p>
+                Heart disease is one of the leading causes of death worldwide. Early detection can save lives.
+                Our tool uses medical data to help you assess your risk and take proactive steps toward a healthier future.
+            </p>
+        </section>
+
+        <section class="features">
+            <div class="card">
+                <h3>🔍 Easy Assessment</h3>
+                <p>Answer a few questions and get instant feedback.</p>
+            </div>
+            <div class="card">
+                <h3>📊 Data-Driven</h3>
+                <p>Built on reliable medical research and predictive models.</p>
+            </div>
+            <div class="card">
+                <h3>🛡️ Privacy First</h3>
+                <p>Your data is secure and never shared without consent.</p>
+            </div>
+        </section>
     </main>
 
     <footer>
-        &copy; 2025 Heart Disease Prediction Project | Developed with Django + ML
+        &copy; 2025 Heart Disease Prediction | Designed with ❤️
     </footer>
 </body>
 </html>
