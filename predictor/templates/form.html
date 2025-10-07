@@ -1,144 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Heart Disease Prediction Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #43cea2, #185a9d);
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            text-align: center;
-            padding: 20px;
-            background: rgba(0,0,0,0.4);
-        }
-        h1 {
-            margin: 0;
-        }
-        form {
-            max-width: 600px;
-            margin: 40px auto;
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 6px;
-            border: none;
-            font-size: 1em;
-        }
-        button {
-            margin-top: 25px;
-            padding: 12px 25px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 8px;
-            background-color: #ffffff;
-            color: #185a9d;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #185a9d;
-            color: white;
-        }
-        .back {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: white;
-            text-decoration: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Cardiovascular Risk Assessment</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #007BFF, #00C6FF);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.8em;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      border: 2px solid #000000;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-columns {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .column {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 500;
+      font-size: 0.95em;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.95em;
+      background-color: #f9f9f9;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: #007BFF;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #007BFF;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .form-columns {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>🩺 Prediction Form</h1>
-    </header>
+  <header>
+    <h1>🧠 Cardiovascular Risk Assessment</h1>
+  </header>
 
-    <form method="POST" action="/predict/">
-        {% csrf_token %}
-        
-        <label>Sex:</label>
-        <select name="male">
-            <option value="1">Male</option>
-            <option value="0">Female</option>
+  <form method="POST" action="/predict/">
+    {% csrf_token %}
+
+    <div class="form-columns">
+      <div class="column">
+        <label for="sex">Sex:</label>
+        <select name="male" id="sex">
+          <option value="1" selected>Male</option>
+          <option value="0">Female</option>
         </select>
 
-        <label>Age:</label>
-        <input type="number" name="age" required>
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" min="18" max="90" value="35" required />
 
-       
-
-        <label>Current Smoker:</label>
-        <select name="currentSmoker">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
+        <label for="smoker">Current Smoker:</label>
+        <select name="currentSmoker" id="smoker" onchange="toggleCigsField()">
+          <option value="1">Yes</option>
+          <option value="0" selected>No</option>
         </select>
 
-        <label>Cigarettes Per Day:</label>
-        <input type="number" name="cigsPerDay" min="0" required>
+        <div id="cigsContainer">
+          <label for="cigs">Cigarettes Per Day:</label>
+          <input type="number" name="cigsPerDay" id="cigs" min="0" max="40" value="0" />
+        </div>
 
-        <label>BP Medication:</label>
-        <select name="BPMeds">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
+        <label for="bpmeds">BP Medicine:</label>
+        <select name="BPMeds" id="bpmeds">
+          <option value="1">Yes</option>
+          <option value="0" selected>No</option>
         </select>
 
-        <label>Prevalent Stroke:</label>
-        <select name="prevalentStroke">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
+        <label for="stroke">Previous Stroke:</label>
+        <select name="prevalentStroke" id="stroke">
+          <option value="1">Yes</option>
+          <option value="0" selected>No</option>
         </select>
 
-        <label>Prevalent Hypertension:</label>
-        <select name="prevalentHyp">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
+        <label for="hyp">Hypertension:</label>
+        <select name="prevalentHyp" id="hyp">
+          <option value="1">Yes</option>
+          <option value="0" selected>No</option>
+        </select>
+      </div>
+
+      <div class="column">
+        <label for="diabetes">Diabetes:</label>
+        <select name="diabetes" id="diabetes">
+          <option value="1">Yes</option>
+          <option value="0" selected>No</option>
         </select>
 
-        <label>Diabetes:</label>
-        <select name="diabetes">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select>
+        <label for="chol">Total Cholesterol:</label>
+        <input type="number" name="totChol" id="chol" min="100" max="350" value="190" required />
 
-        <label>Total Cholesterol:</label>
-        <input type="number" name="totChol" required>
+        <label for="sysbp">Systolic BP:</label>
+        <input type="number" name="sysBP" id="sysbp" min="90" max="200" value="120" required />
 
-        <label>Systolic BP:</label>
-        <input type="number" name="sysBP" required>
+        <label for="diabp">Diastolic BP:</label>
+        <input type="number" name="diaBP" id="diabp" min="60" max="120" value="80" required />
 
-        <label>Diastolic BP:</label>
-        <input type="number" name="diaBP" required>
+        <label for="bmi">BMI:</label>
+        <input type="number" name="BMI" id="bmi" step="0.1" min="15" max="40" value="24.5" required />
 
-        <label>BMI:</label>
-        <input type="number" name="BMI" step="0.1" required>
+        <label for="hr">Heart Rate:</label>
+        <input type="number" name="heartRate" id="hr" min="50" max="120" value="72" required />
 
-        <label>Heart Rate:</label>
-        <input type="number" name="heartRate" required>
+        <label for="glucose">Glucose:</label>
+        <input type="number" name="glucose" id="glucose" min="70" max="200" value="95" required />
+      </div>
+    </div>
 
-        <label>Glucose:</label>
-        <input type="number" name="glucose" required>
+    <button type="submit">Assess Risk</button>
+  </form>
 
-        <button type="submit">Predict</button>
-    </form>
+  <a href="/" class="back">⬅ Back to Home</a>
 
-    <a href="/" class="back">⬅ Back to Home</a>
+  <script>
+    function toggleCigsField() {
+      const smoker = document.getElementById("smoker");
+      const cigsContainer = document.getElementById("cigsContainer");
+      const cigsInput = document.getElementById("cigs");
+
+      if (smoker.value === "1") {
+        cigsContainer.style.display = "block";
+      } else {
+        cigsContainer.style.display = "none";
+        cigsInput.value = 0;
+      }
+    }
+
+    window.onload = toggleCigsField;
+  </script>
 </body>
 </html>
